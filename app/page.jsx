@@ -1,7 +1,9 @@
+import HomeTest from "./Home";
+
 export default function Home() {
   return (
    <main>
-  <div>God is good, all the time!</div>
+    <HomeTest />
    </main>
   );
 }
