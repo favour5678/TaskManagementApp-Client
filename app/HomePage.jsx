@@ -1,4 +1,5 @@
 import React from 'react'
+import CreatedTasks from './CreatedTasks'
 
 export default function HomePage() {
   return (
@@ -11,6 +12,7 @@ export default function HomePage() {
             </div>
         </div>
         <div className='border border-green-900 mt-10 mx-10'></div>
+        <CreatedTasks />
     </section>
   )
 }
