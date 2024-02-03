@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function LandingPage() {
+export default function HomePage() {
   return (
     <section>
         <h1 className="text-center text-xl pt-5">Task Management Application(T.M.A)</h1>
@@ -11,11 +11,6 @@ export default function LandingPage() {
             </div>
         </div>
         <div className='border border-green-900 mt-10 mx-10'></div>
-        
-        {/* Created Tasks */}
-        <div>
-
-        </div>
     </section>
   )
 }
