@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function HomeTest() {
+export default function LandingPage() {
   return (
     <section>
         <h1 className="text-center text-xl pt-5">Task Management Application(T.M.A)</h1>
@@ -14,7 +14,7 @@ export default function HomeTest() {
         
         {/* Created Tasks */}
         <div>
-            
+
         </div>
     </section>
   )

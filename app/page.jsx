@@ -1,9 +1,9 @@
-import HomeTest from "./Home";
+import LandingPage from "./LandingPage";
 
 export default function Home() {
   return (
    <main>
-    <HomeTest />
+    <LandingPage />
    </main>
   );
 }
