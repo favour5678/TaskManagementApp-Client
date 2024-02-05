@@ -9,7 +9,7 @@ export default function HomePage() {
 
   const handleCreateTask = () => {
     if (tasksValue.trim() !== '') {
-      setTasks(prevTasks => [...prevTasks, tasksValue])
+      setTasks(prevTasks => [...prevTasks, tasksValue.trim()])
       setTasksValue('')
     }
   }
