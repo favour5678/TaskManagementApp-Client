@@ -29,7 +29,7 @@ export default function HomePage() {
         />
         <div className="font-semibold text-lg">
           <button
-            className="bg-green-300 p-2 rounded-md"
+            className="bg-green-300 p-2 rounded-md border border-green-400"
             onClick={handleCreateTask}
           >
             Create Task
