@@ -7,10 +7,10 @@ export default function CreatedTasks({ tasks }) {
     <div>
       <h2 className="text-center font-semibold my-2 text-lg">Created Tasks</h2>
       {tasks.map((task, index) => (
-        <div key={index}>
+        <div key={index} className="flex items-center">
           <p>{task}</p>
-          <FaRegEdit />
-          <BsTrash3Fill />
+          <button><FaRegEdit /></button>
+          <button><BsTrash3Fill /></button>
         </div>
       ))}
     </div>
