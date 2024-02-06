@@ -16,7 +16,7 @@ export default function HomePage() {
 
   return (
     <section>
-      <h1 className="text-center text-xl pt-5">
+      <h1 className="text-center font-semibold text-xl pt-5">
         Task Management Application(T.M.A)
       </h1>
       <div className="ml-10 mt-10 space-y-2">
@@ -29,7 +29,7 @@ export default function HomePage() {
         />
         <div className="font-semibold text-lg">
           <button
-            className="bg-green-300 p-2 rounded-md border border-green-400"
+            className="bg-green-300 p-2 rounded-md border border-green-400 outline-none"
             onClick={handleCreateTask}
           >
             Create Task

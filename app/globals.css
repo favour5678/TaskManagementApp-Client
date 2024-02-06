@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .icon-style {
-    @apply w-[10%] flex justify-center text-lg;
+    @apply w-[10%] flex justify-center text-lg outline-none;
 }
