@@ -14,6 +14,18 @@ export default function HomePage() {
     }
   };
 
+  const handleEdit = (index, editedTask) => {
+    const updatedTasks = [...tasks]
+    updatedTasks[index] = editedTask;
+    setTasks(updatedTasks)
+  }
+
+  const handleDelete = (index) => {
+    const updatedTasks = [...tasks];
+    updatedTasks.splice(index, 1)
+    setTasks(updatedTasks)
+  }
+
   return (
     <section>
       <h1 className="text-center font-semibold text-xl pt-5">
@@ -38,7 +50,7 @@ export default function HomePage() {
       </div>
       <div className="border border-green-900 mt-10 mx-10"></div>
 
-      <CreatedTasks tasks={tasks} />
+      <CreatedTasks tasks={tasks} onEdit={handleEdit} onDelete={handleDelete}/>
     </section>
   );
 }

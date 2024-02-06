@@ -1,21 +1,67 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { BsTrash3Fill } from "react-icons/bs";
+import { IoIosCheckmarkCircle } from "react-icons/io";
+import { MdOutlineCancel } from "react-icons/md";
 
-export default function CreatedTasks({ tasks, edit, del }) {
+export default function CreatedTasks({ tasks, onEdit, onDelete }) {
+  const [editableTaskIndex, setEditableTaskIndex] = useState(null);
+  const [editedTask, setEditedTask] = useState("");
+
+  const handleEdit = (index) => {
+    setEditableTaskIndex(index);
+    setEditedTask(tasks[index]);
+  };
+
+  const handleSave = (index) => {
+    onEdit(index, editedTask.trim());
+
+    setEditableTaskIndex(null);
+    setEditedTask("");
+  };
+
+  const handleCancelEdit = () => {
+    setEditableTaskIndex(null);
+    setEditedTask("");
+  };
+
+  const handleDelete = (index) => {
+    onDelete(index);
+  };
 
   return (
     <div>
-      <h2 className="text-center font-semibold my-2 text-lg">Created Tasks</h2>
       {tasks.map((task, index) => (
-        <div key={index} className="flex items-center bg-green-200 mt-5 font-semibold mx-10 py-2">
-          <p className="w-[80%] break-words pl-2">{task}</p>
-          <button className="icon-style">
-            <FaRegEdit />
-          </button>
-          <button className="icon-style" onClick={() => del(index)}>
-            <BsTrash3Fill />
-          </button>
+        <div key={index} className="bg-green-200 mt-5 font-semibold mx-10 py-2">
+          {editableTaskIndex === index ? (
+            <div className="flex items-center">
+              <input
+                type="text"
+                value={editedTask}
+                onChange={(e) => setEditedTask(e.target.value)}
+                className="w-[80%] pl-2 ml-2 outline-none border border-green-900"
+              />
+              <button className="icon-style" onClick={() => handleSave(index)}>
+                <IoIosCheckmarkCircle className="text-2xl"/>
+              </button>
+              <button className="icon-style" onClick={handleCancelEdit}>
+                <MdOutlineCancel className="text-2xl"/>
+              </button>
+            </div>
+          ) : (
+            <div className="flex items-center">
+              <p className="w-[80%] break-words pl-2">{task}</p>
+              <button className="icon-style" onClick={() => handleEdit(index)}>
+                <FaRegEdit />
+              </button>
+              <button
+                className="icon-style"
+                onClick={() => handleDelete(index)}
+              >
+                <BsTrash3Fill />
+              </button>
+            </div>
+          )}
         </div>
       ))}
     </div>
