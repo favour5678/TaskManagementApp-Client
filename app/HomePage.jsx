@@ -11,6 +11,21 @@ export default function HomePage() {
     if (tasksValue.trim() !== "") {
       setTasks((prevTasks) => [...prevTasks, tasksValue.trim()]);
       setTasksValue("");
+    
+      fetch('http://localhost:4000/tasks', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify({ task: tasksValue.trim() })
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Task saved to the database', data)
+        })
+        .catch(error => {
+          console.error('Error saving task to the database', error)
+        })
     }
   };
 
