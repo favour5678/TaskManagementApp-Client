@@ -1,11 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CreatedTasks from "./CreatedTasks";
 
-export default function HomePage() {
-  const [tasks, setTasks] = useState([]);
-  const [tasksValue, setTasksValue] = useState("");
+export default function HomePage({ initialTasks }) {
+  const [tasks, setTasks] = useState(initialTasks || []);
+  const [tasksValue, setTasksValue] = useState(" ");
+
+  useEffect(() => {
+    setTasks(initialTasks || [])
+  }, [initialTasks])
+  
 
   const handleCreateTask = () => {
     if (tasksValue.trim() !== "") {
@@ -68,4 +73,14 @@ export default function HomePage() {
       <CreatedTasks tasks={tasks} onEdit={handleEdit} onDelete={handleDelete}/>
     </section>
   );
+}
+
+
+export async function getServerSideProps() {
+  const res = await fetch('http://localhost:4000/tasks');
+  const initialTasks = await res.json();
+
+  return {
+      initialTasks
+  };
 }
