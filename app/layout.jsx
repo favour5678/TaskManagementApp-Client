@@ -12,4 +12,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="bg-gray-100 text-green-900">
       <body className={georgian.className}>{children}</body>
-    </html
+    </html>
+  );
+}
