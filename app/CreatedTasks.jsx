@@ -50,7 +50,7 @@ export default function CreatedTasks({ tasks, onEdit, onDelete }) {
             </div>
           ) : (
             <div className="flex items-center">
-              <p className="w-[80%] break-words pl-2">{task}</p>
+              <p className="w-[80%] break-words pl-2">{task.content}</p>
               <button className="icon-style" onClick={() => handleEdit(index)}>
                 <FaRegEdit />
               </button>
