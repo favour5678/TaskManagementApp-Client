@@ -3,55 +3,30 @@
 import { useEffect, useState } from "react";
 import CreatedTasks from "./CreatedTasks";
 
-export default function HomePage({ initialTasks }) {
-  // const [tasks, setTasks] = useState(initialTasks || []);
+export default function HomePage() {
   const [tasks, setTasks] = useState([]);
   const [tasksValue, setTasksValue] = useState(" ");
 
-  // useEffect(() => {
-  //   setTasks(initialTasks || [])
-  // }, [initialTasks])
-  
+
   useEffect(() => {
-    if (initialTasks) {
-      setTasks(initialTasks)
-    } else {
-      fetchTasksFromServer()
-    }
-  }, [])
+    fetchTasks();
+  }, []);
 
-  const fetchTasksFromServer = () => {
+  const fetchTasks = () => {
     fetch('http://localhost:4000/tasks')
-    .then(response => response.json())
-    .then(data => setTasks(data))
-    .catch(err => console.err('Error fetching tasks from the server', err))
-  }
+      .then(response => response.json())
+      .then(data => {
+        setTasks(data);
+      })
+      .catch(error => {
+        console.error('Error fetching tasks from the database', error);
+      });
+  };
 
-  // const handleCreateTask = () => {
-  //   if (tasksValue.trim() !== "") {
-  //     setTasks((prevTasks) => [...prevTasks, tasksValue.trim()]);
-  //     setTasksValue("");
-    
-  //     fetch('http://localhost:4000/tasks', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-type': 'application/json'
-  //       },
-  //       body: JSON.stringify({ task: tasksValue.trim() })
-  //     })
-  //       .then(response => response.json())
-  //       .then(data => {
-  //         console.log('Task saved to the database', data)
-  //       })
-  //       .catch(error => {
-  //         console.error('Error saving task to the database', error)
-  //       })
-  //   }
-  // };
 
   const handleCreateTask = () => {
     if (tasksValue.trim() !== "") {
-      // Send task to the server
+    
       fetch('http://localhost:4000/tasks', {
         method: 'POST',
         headers: {
@@ -60,19 +35,18 @@ export default function HomePage({ initialTasks }) {
         body: JSON.stringify({ task: tasksValue.trim() })
       })
         .then(response => response.json())
-        .then(newTask => {
-          console.log('Task saved to the database', newTask);
-          // Update the state with the newly created task
-          setTasks(prevTasks => [...prevTasks, newTask]);
-          // Clear input field
-          setTasksValue("");
+        .then(data => {
+          console.log('Task saved to the database', data)
+          
+          fetchTasks();
+          setTasks(prevTasks => [...prevTasks, data])
+          setTasksValue('')
         })
         .catch(error => {
-          console.error('Error saving task to the database', error);
-        });
+          console.error('Error saving task to the database', error)
+        })
     }
   };
-  
 
   const handleEdit = (index, editedTask) => {
     const updatedTasks = [...tasks]
