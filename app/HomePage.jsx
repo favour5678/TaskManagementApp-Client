@@ -11,7 +11,7 @@ export default function HomePage() {
     fetchTasks();
   }, []);
 
-// get tasks
+  // get tasks
   const fetchTasks = () => {
     fetch("http://localhost:4000/tasks")
       .then((response) => response.json())
@@ -23,7 +23,7 @@ export default function HomePage() {
       });
   };
 
-// create tasks
+  // create tasks
   const handleCreateTask = () => {
     if (tasksValue.trim() !== "") {
       fetch("http://localhost:4000/tasks", {
@@ -47,7 +47,7 @@ export default function HomePage() {
     }
   };
 
-// edit tasks
+  // edit tasks
   const handleEdit = (index, editedTask) => {
     const taskId = tasks[index]._id;
     const updatedTask = { content: editedTask };
@@ -67,20 +67,39 @@ export default function HomePage() {
       })
       .then((data) => {
         console.log("Task updated on the server", data);
-        const updatedTasks = [...tasks]
-        updatedTasks[index].content = updatedTask.content
-        setTasks(updatedTasks)
+        const updatedTasks = [...tasks];
+        updatedTasks[index].content = updatedTask.content;
+        setTasks(updatedTasks);
       })
       .catch((error) => {
         console.error("Error updating task on the server", error);
       });
   };
 
-// delete tasks  
+  // delete tasks
   const handleDelete = (index) => {
-    const updatedTasks = [...tasks];
-    updatedTasks.splice(index, 1);
-    setTasks(updatedTasks);
+    const taskId = tasks[index]._id;
+
+    fetch(`http://localhost:4000/tasks/${taskId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log("Task deleted succesfully");
+
+          const updatedTasks = [...tasks];
+          updatedTasks.splice(index, 1);
+          setTasks(updatedTasks);
+        } else {
+          throw new Error("Failed to delete task on the server");
+        }
+      })
+      .catch((error) => {
+        console.error("Error deleting task on the server", error);
+      });
   };
 
   return (
