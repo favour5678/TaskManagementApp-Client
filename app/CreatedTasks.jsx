@@ -4,22 +4,22 @@ import { BsTrash3Fill } from "react-icons/bs";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { MdOutlineCancel } from "react-icons/md";
 
-export default function CreatedTasks({ tasks, onEdit, onDelete }) {
+export default function CreatedTasks({ tasks, onDelete, onSave, }) {
   const [editableTaskIndex, setEditableTaskIndex] = useState(null);
   const [editedTask, setEditedTask] = useState("");
 
   const handleEdit = (index) => {
     setEditableTaskIndex(index);
-    setEditedTask(tasks[index]);
+    setEditedTask(tasks[index].content);
   };
 
   const handleSave = (index) => {
-    onEdit(index, editedTask.trim());
-
-    setEditableTaskIndex(null);
-    setEditedTask("");
+    onSave(index, editedTask.trim())
+  
+      setEditableTaskIndex(null);
+      setEditedTask("");
   };
-
+  
   const handleCancelEdit = () => {
     setEditableTaskIndex(null);
     setEditedTask("");

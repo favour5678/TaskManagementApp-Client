@@ -7,58 +7,81 @@ export default function HomePage() {
   const [tasks, setTasks] = useState([]);
   const [tasksValue, setTasksValue] = useState(" ");
 
-
   useEffect(() => {
     fetchTasks();
   }, []);
 
+// get tasks
   const fetchTasks = () => {
-    fetch('http://localhost:4000/tasks')
-      .then(response => response.json())
-      .then(data => {
+    fetch("http://localhost:4000/tasks")
+      .then((response) => response.json())
+      .then((data) => {
         setTasks(data);
       })
-      .catch(error => {
-        console.error('Error fetching tasks from the database', error);
+      .catch((error) => {
+        console.error("Error fetching tasks from the database", error);
       });
   };
 
-
+// create tasks
   const handleCreateTask = () => {
     if (tasksValue.trim() !== "") {
-    
-      fetch('http://localhost:4000/tasks', {
-        method: 'POST',
+      fetch("http://localhost:4000/tasks", {
+        method: "POST",
         headers: {
-          'Content-type': 'application/json'
+          "Content-type": "application/json",
         },
-        body: JSON.stringify({ task: tasksValue.trim() })
+        body: JSON.stringify({ task: tasksValue.trim() }),
       })
-        .then(response => response.json())
-        .then(data => {
-          console.log('Task saved to the database', data)
-          
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Task saved to the database", data);
+
           fetchTasks();
-          setTasks(prevTasks => [...prevTasks, data])
-          setTasksValue('')
+          setTasks((prevTasks) => [...prevTasks, data]);
+          setTasksValue("");
         })
-        .catch(error => {
-          console.error('Error saving task to the database', error)
-        })
+        .catch((error) => {
+          console.error("Error saving task to the database", error);
+        });
     }
   };
 
+// edit tasks
   const handleEdit = (index, editedTask) => {
-    const updatedTasks = [...tasks]
-    updatedTasks[index] = editedTask;
-    setTasks(updatedTasks)
-  }
+    const taskId = tasks[index]._id;
+    const updatedTask = { content: editedTask };
 
+    fetch(`http://localhost:4000/tasks/${taskId}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({ task: { content: updatedTask.content } }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to update task on the server");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Task updated on the server", data);
+        const updatedTasks = [...tasks]
+        updatedTasks[index].content = updatedTask.content
+        setTasks(updatedTasks)
+      })
+      .catch((error) => {
+        console.error("Error updating task on the server", error);
+      });
+  };
+
+// delete tasks  
   const handleDelete = (index) => {
     const updatedTasks = [...tasks];
-    updatedTasks.splice(index, 1)
-    setTasks(updatedTasks)
-  }
+    updatedTasks.splice(index, 1);
+    setTasks(updatedTasks);
+  };
 
   return (
     <section>
@@ -84,7 +107,7 @@ export default function HomePage() {
       </div>
       <div className="border border-green-900 mt-10 mx-10"></div>
 
-      <CreatedTasks tasks={tasks} onEdit={handleEdit} onDelete={handleDelete}/>
+      <CreatedTasks tasks={tasks} onSave={handleEdit} onDelete={handleDelete} />
     </section>
   );
 }
