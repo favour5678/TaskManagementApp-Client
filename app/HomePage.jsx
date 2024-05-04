@@ -8,6 +8,7 @@ export default function HomePage() {
   const [tasksValue, setTasksValue] = useState(" ");
   const [successMessage, setSuccessMessage] = useState('')
   const [deleteMessage, setDeleteMessage] = useState('')
+  const [updateMessage, setUpdateMessage] = useState('')
 
   useEffect(() => {
     fetchTasks();
@@ -37,7 +38,7 @@ export default function HomePage() {
       })
         .then((response) => response.json())
         .then((data) => {
-          setSuccessMessage(data.success)
+          setSuccessMessage(data.message)
           setTimeout(() => {
             setSuccessMessage('')
           }, 1500)
@@ -71,7 +72,11 @@ export default function HomePage() {
         return response.json();
       })
       .then((data) => {
-        console.log("Task updated on the server", data);
+        setUpdateMessage(data.message)
+        setTimeout(() => {
+          setUpdateMessage('')
+        }, 1500)
+
         const updatedTasks = [...tasks];
         updatedTasks[index].content = updatedTask.content;
         setTasks(updatedTasks);
@@ -134,6 +139,7 @@ export default function HomePage() {
       </div>
       <p className="italic text-green-600 text-center text-lg font-semibold uppercase">{successMessage}</p>
       <p className="italic text-red-600 text-center text-lg font-semibold uppercase">{deleteMessage}</p>
+      <p className="italic text-blue-600 text-center text-lg font-semibold uppercase">{updateMessage}</p>
       <div className="border border-green-900 mt-10 mx-10"></div>
       
       <CreatedTasks tasks={tasks} onSave={handleEdit} onDelete={handleDelete} />
