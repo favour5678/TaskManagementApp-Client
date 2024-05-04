@@ -6,6 +6,7 @@ import CreatedTasks from "./CreatedTasks";
 export default function HomePage() {
   const [tasks, setTasks] = useState([]);
   const [tasksValue, setTasksValue] = useState(" ");
+  const [successMessage, setSuccessMessage] = useState('')
 
   useEffect(() => {
     fetchTasks();
@@ -35,7 +36,8 @@ export default function HomePage() {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log("Task saved to the database", data);
+          console.log(data.success)
+          setSuccessMessage(data.success)
 
           fetchTasks();
           setTasks((prevTasks) => [...prevTasks, data]);
@@ -124,8 +126,9 @@ export default function HomePage() {
           </button>
         </div>
       </div>
+      <p className="">{}</p>
       <div className="border border-green-900 mt-10 mx-10"></div>
-
+      
       <CreatedTasks tasks={tasks} onSave={handleEdit} onDelete={handleDelete} />
     </section>
   );
