@@ -7,6 +7,7 @@ export default function HomePage() {
   const [tasks, setTasks] = useState([]);
   const [tasksValue, setTasksValue] = useState(" ");
   const [successMessage, setSuccessMessage] = useState('')
+  const [deleteMessage, setDeleteMessage] = useState('')
 
   useEffect(() => {
     fetchTasks();
@@ -39,7 +40,7 @@ export default function HomePage() {
           setSuccessMessage(data.success)
           setTimeout(() => {
             setSuccessMessage('')
-          }, 3000)
+          }, 1500)
 
           fetchTasks();
           setTasks((prevTasks) => [...prevTasks, data]);
@@ -92,7 +93,10 @@ export default function HomePage() {
     })
       .then((response) => {
         if (response.ok) {
-          console.log("Task deleted succesfully");
+          setDeleteMessage('Task deleted successfully')
+          setTimeout(() => {
+            setDeleteMessage('')
+          }, 1500)
 
           const updatedTasks = [...tasks];
           updatedTasks.splice(index, 1);
@@ -129,6 +133,7 @@ export default function HomePage() {
         </div>
       </div>
       <p className="italic text-green-600 text-center text-lg font-semibold uppercase">{successMessage}</p>
+      <p className="italic text-red-600 text-center text-lg font-semibold uppercase">{deleteMessage}</p>
       <div className="border border-green-900 mt-10 mx-10"></div>
       
       <CreatedTasks tasks={tasks} onSave={handleEdit} onDelete={handleDelete} />
