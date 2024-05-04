@@ -7,6 +7,7 @@ export default function HomePage() {
   const [tasks, setTasks] = useState([]);
   const [tasksValue, setTasksValue] = useState(" ");
   const [successMessage, setSuccessMessage] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
   const [deleteMessage, setDeleteMessage] = useState('')
   const [updateMessage, setUpdateMessage] = useState('')
 
@@ -50,6 +51,12 @@ export default function HomePage() {
         .catch((error) => {
           console.error("Error saving task to the database", error);
         });
+    } else {
+      setErrorMessage('Fill the input field!')
+      
+      setTimeout(() => {
+        setErrorMessage('')
+      }, 1500);
     }
   };
 
@@ -138,6 +145,7 @@ export default function HomePage() {
         </div>
       </div>
       <p className="italic text-green-600 text-center text-lg font-semibold uppercase">{successMessage}</p>
+      <p className="italic text-red-700 text-center text-lg font-semibold uppercase">{errorMessage}</p>
       <p className="italic text-red-600 text-center text-lg font-semibold uppercase">{deleteMessage}</p>
       <p className="italic text-green-600 text-center text-lg font-semibold uppercase">{updateMessage}</p>
       <div className="border border-green-900 mt-10 mx-10"></div>
