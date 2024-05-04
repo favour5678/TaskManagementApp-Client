@@ -6,10 +6,10 @@ import CreatedTasks from "./CreatedTasks";
 export default function HomePage() {
   const [tasks, setTasks] = useState([]);
   const [tasksValue, setTasksValue] = useState(" ");
-  const [successMessage, setSuccessMessage] = useState('')
-  const [errorMessage, setErrorMessage] = useState('')
-  const [deleteMessage, setDeleteMessage] = useState('')
-  const [updateMessage, setUpdateMessage] = useState('')
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [deleteMessage, setDeleteMessage] = useState("");
+  const [updateMessage, setUpdateMessage] = useState("");
 
   useEffect(() => {
     fetchTasks();
@@ -39,10 +39,10 @@ export default function HomePage() {
       })
         .then((response) => response.json())
         .then((data) => {
-          setSuccessMessage(data.message)
+          setSuccessMessage(data.message);
           setTimeout(() => {
-            setSuccessMessage('')
-          }, 1500)
+            setSuccessMessage("");
+          }, 1500);
 
           fetchTasks();
           setTasks((prevTasks) => [...prevTasks, data]);
@@ -52,10 +52,10 @@ export default function HomePage() {
           console.error("Error saving task to the database", error);
         });
     } else {
-      setErrorMessage('Fill the input field!')
-      
+      setErrorMessage("Fill the input field!");
+
       setTimeout(() => {
-        setErrorMessage('')
+        setErrorMessage("");
       }, 1500);
     }
   };
@@ -79,10 +79,10 @@ export default function HomePage() {
         return response.json();
       })
       .then((data) => {
-        setUpdateMessage(data.message)
+        setUpdateMessage(data.message);
         setTimeout(() => {
-          setUpdateMessage('')
-        }, 1500)
+          setUpdateMessage("");
+        }, 1500);
 
         const updatedTasks = [...tasks];
         updatedTasks[index].content = updatedTask.content;
@@ -105,10 +105,10 @@ export default function HomePage() {
     })
       .then((response) => {
         if (response.ok) {
-          setDeleteMessage('Task deleted successfully')
+          setDeleteMessage("Task deleted successfully");
           setTimeout(() => {
-            setDeleteMessage('')
-          }, 1500)
+            setDeleteMessage("");
+          }, 1500);
 
           const updatedTasks = [...tasks];
           updatedTasks.splice(index, 1);
@@ -124,7 +124,7 @@ export default function HomePage() {
 
   return (
     <section>
-      <h1 className="text-center font-semibold text-xl pt-5">
+      <h1 className="text-center font-semibold text-lg md:text-xl pt-5">
         Task Management Application(T.M.A)
       </h1>
       <div className="ml-10 mt-10 space-y-2">
@@ -132,24 +132,32 @@ export default function HomePage() {
           type="text"
           value={tasksValue}
           onChange={(e) => setTasksValue(e.target.value)}
-          className="border outline-none px-3 border-green-900 h-10 w-[30%]"
+          className="border outline-none px-3 border-green-900 h-10 w-[50%] md:w-[30%]"
           placeholder="Input task here"
         />
-        <div className="font-semibold text-lg">
+        <div className="font-semibold text-base md:text-lg">
           <button
-            className="bg-green-300 p-2 rounded-md border border-green-400 outline-none"
+            className="bg-green-300 p-1 md:p-2 rounded-md border border-green-400 outline-none"
             onClick={handleCreateTask}
           >
             Create Task
           </button>
         </div>
       </div>
-      <p className="italic text-green-600 text-center text-lg font-semibold uppercase">{successMessage}</p>
-      <p className="italic text-red-700 text-center text-lg font-semibold uppercase">{errorMessage}</p>
-      <p className="italic text-red-600 text-center text-lg font-semibold uppercase">{deleteMessage}</p>
-      <p className="italic text-green-600 text-center text-lg font-semibold uppercase">{updateMessage}</p>
+      <p className="italic text-green-600 text-center text-base md:text-lg font-semibold uppercase">
+        {successMessage}
+      </p>
+      <p className="italic text-red-700 text-center text-base md:text-lg font-semibold uppercase">
+        {errorMessage}
+      </p>
+      <p className="italic text-red-600 text-center text-base md:text-lg font-semibold uppercase">
+        {deleteMessage}
+      </p>
+      <p className="italic text-green-600 text-center text-base md:text-lg font-semibold uppercase">
+        {updateMessage}
+      </p>
       <div className="border border-green-900 mt-10 mx-10"></div>
-      
+
       <CreatedTasks tasks={tasks} onSave={handleEdit} onDelete={handleDelete} />
     </section>
   );
