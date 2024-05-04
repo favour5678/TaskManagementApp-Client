@@ -139,7 +139,7 @@ export default function HomePage() {
       </div>
       <p className="italic text-green-600 text-center text-lg font-semibold uppercase">{successMessage}</p>
       <p className="italic text-red-600 text-center text-lg font-semibold uppercase">{deleteMessage}</p>
-      <p className="italic text-blue-600 text-center text-lg font-semibold uppercase">{updateMessage}</p>
+      <p className="italic text-green-600 text-center text-lg font-semibold uppercase">{updateMessage}</p>
       <div className="border border-green-900 mt-10 mx-10"></div>
       
       <CreatedTasks tasks={tasks} onSave={handleEdit} onDelete={handleDelete} />
