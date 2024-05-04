@@ -36,8 +36,10 @@ export default function HomePage() {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data.success)
           setSuccessMessage(data.success)
+          setTimeout(() => {
+            setSuccessMessage('')
+          }, 3000)
 
           fetchTasks();
           setTasks((prevTasks) => [...prevTasks, data]);
@@ -126,7 +128,7 @@ export default function HomePage() {
           </button>
         </div>
       </div>
-      <p className="">{}</p>
+      <p className="italic text-green-600 text-center text-lg font-semibold uppercase">{successMessage}</p>
       <div className="border border-green-900 mt-10 mx-10"></div>
       
       <CreatedTasks tasks={tasks} onSave={handleEdit} onDelete={handleDelete} />
