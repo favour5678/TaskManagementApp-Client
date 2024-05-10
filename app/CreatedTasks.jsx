@@ -42,10 +42,10 @@ export default function CreatedTasks({ tasks, onDelete, onSave }) {
                 className="w-[80%] pl-2 ml-2 outline-none border border-green-900 text-sm md:text-base"
               />
               <button className="icon-style" onClick={() => handleSave(index)}>
-                <IoIosCheckmarkCircle className="text-base md:text-2xl" />
+                <IoIosCheckmarkCircle className="text-lg md:text-2xl" />
               </button>
               <button className="icon-style" onClick={handleCancelEdit}>
-                <MdOutlineCancel className="text-base md:text-2xl" />
+                <MdOutlineCancel className="text-lg md:text-2xl" />
               </button>
             </div>
           ) : (
