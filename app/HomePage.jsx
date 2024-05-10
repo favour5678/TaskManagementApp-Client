@@ -124,7 +124,7 @@ export default function HomePage() {
 
   return (
     <section>
-      <h1 className="text-center font-semibold text-lg md:text-xl pt-5">
+      <h1 className="text-center font-semibold text-base md:text-xl pt-5">
         Task Management Application(T.M.A)
       </h1>
       <div className="ml-10 mt-10 space-y-2">
