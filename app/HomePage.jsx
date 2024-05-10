@@ -132,12 +132,12 @@ export default function HomePage() {
           type="text"
           value={tasksValue}
           onChange={(e) => setTasksValue(e.target.value)}
-          className="border outline-none px-3 border-green-900 h-10 w-[50%] md:w-[30%]"
+          className="border outline-none px-3 border-green-900 h-10 w-[70%] md:w-[30%]"
           placeholder="Input task here"
         />
         <div className="font-semibold text-base md:text-lg">
           <button
-            className="bg-green-300 p-1 md:p-2 rounded-md border border-green-400 outline-none"
+            className="bg-green-300 p-1 md:p-2 rounded-md border border-green-400 outline-none text-sm md:text-base"
             onClick={handleCreateTask}
           >
             Create Task

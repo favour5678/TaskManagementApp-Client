@@ -39,13 +39,13 @@ export default function CreatedTasks({ tasks, onDelete, onSave }) {
                 type="text"
                 value={editedTask}
                 onChange={(e) => setEditedTask(e.target.value)}
-                className="w-[80%] pl-2 ml-2 outline-none border border-green-900"
+                className="w-[80%] pl-2 ml-2 outline-none border border-green-900 text-sm md:text-base"
               />
               <button className="icon-style" onClick={() => handleSave(index)}>
-                <IoIosCheckmarkCircle className="text-2xl" />
+                <IoIosCheckmarkCircle className="text-base md:text-2xl" />
               </button>
               <button className="icon-style" onClick={handleCancelEdit}>
-                <MdOutlineCancel className="text-2xl" />
+                <MdOutlineCancel className="text-base md:text-2xl" />
               </button>
             </div>
           ) : (
