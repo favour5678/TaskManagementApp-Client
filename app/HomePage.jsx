@@ -17,7 +17,7 @@ export default function HomePage() {
 
   // get tasks
   const fetchTasks = () => {
-    fetch("http://localhost:4000/tasks")
+    fetch("https://tma-server-630e.onrender.com/tasks")
       .then((response) => response.json())
       .then((data) => {
         setTasks(data);
@@ -30,7 +30,7 @@ export default function HomePage() {
   // create tasks
   const handleCreateTask = () => {
     if (tasksValue.trim() !== "") {
-      fetch("http://localhost:4000/tasks", {
+      fetch("https://tma-server-630e.onrender.com/tasks", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -65,7 +65,7 @@ export default function HomePage() {
     const taskId = tasks[index]._id;
     const updatedTask = { content: editedTask };
 
-    fetch(`http://localhost:4000/tasks/${taskId}`, {
+    fetch(`https://tma-server-630e.onrender.com/tasks/${taskId}`, {
       method: "PUT",
       headers: {
         "Content-type": "application/json",
@@ -97,7 +97,7 @@ export default function HomePage() {
   const handleDelete = (index) => {
     const taskId = tasks[index]._id;
 
-    fetch(`http://localhost:4000/tasks/${taskId}`, {
+    fetch(`https://tma-server-630e.onrender.com/tasks/${taskId}`, {
       method: "DELETE",
       headers: {
         "Content-type": "application/json",
