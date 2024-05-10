@@ -132,28 +132,28 @@ export default function HomePage() {
           type="text"
           value={tasksValue}
           onChange={(e) => setTasksValue(e.target.value)}
-          className="border outline-none px-3 border-green-900 h-10 w-[70%] md:w-[30%]"
+          className="border outline-none px-3 border-green-900 h-10 w-[70%] md:w-[30%] text-sm md:text-base"
           placeholder="Input task here"
         />
         <div className="font-semibold text-base md:text-lg">
           <button
-            className="bg-green-300 p-1 md:p-2 rounded-md border border-green-400 outline-none text-sm md:text-base"
+            className="bg-green-300 p-1 md:p-2 rounded-md border border-green-400 outline-none"
             onClick={handleCreateTask}
           >
             Create Task
           </button>
         </div>
       </div>
-      <p className="italic text-green-600 text-center text-base md:text-lg font-semibold uppercase">
+      <p className="italic text-green-600 text-center text-sm md:text-lg font-semibold uppercase">
         {successMessage}
       </p>
-      <p className="italic text-red-700 text-center text-base md:text-lg font-semibold uppercase">
+      <p className="italic text-red-700 text-center text-sm md:text-lg font-semibold uppercase">
         {errorMessage}
       </p>
-      <p className="italic text-red-600 text-center text-base md:text-lg font-semibold uppercase">
+      <p className="italic text-red-600 text-center text-sm md:text-lg font-semibold uppercase">
         {deleteMessage}
       </p>
-      <p className="italic text-green-600 text-center text-base md:text-lg font-semibold uppercase">
+      <p className="italic text-green-600 text-center text-sm md:text-lg font-semibold uppercase">
         {updateMessage}
       </p>
       <div className="border border-green-900 mt-10 mx-10"></div>
