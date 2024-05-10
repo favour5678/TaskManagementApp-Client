@@ -144,16 +144,16 @@ export default function HomePage() {
           </button>
         </div>
       </div>
-      <p className="italic text-green-600 text-center text-sm md:text-lg font-semibold uppercase">
+      <p className="italic text-green-600 text-center text-sm md:text-lg font-semibold uppercase pt-2 md:pt-0">
         {successMessage}
       </p>
-      <p className="italic text-red-700 text-center text-sm md:text-lg font-semibold uppercase">
+      <p className="italic text-red-700 text-center text-sm md:text-lg font-semibold uppercase pt-2 md:pt-0">
         {errorMessage}
       </p>
-      <p className="italic text-red-600 text-center text-sm md:text-lg font-semibold uppercase">
+      <p className="italic text-red-600 text-center text-sm md:text-lg font-semibold uppercase pt-2 md:pt-0">
         {deleteMessage}
       </p>
-      <p className="italic text-green-600 text-center text-sm md:text-lg font-semibold uppercase">
+      <p className="italic text-green-600 text-center text-sm md:text-lg font-semibold uppercase pt-2 md:pt-0">
         {updateMessage}
       </p>
       <div className="border border-green-900 mt-10 mx-10"></div>
